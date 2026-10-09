@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/UDPlogger" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/esp-cjson" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/esp-cjson/cJSON" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/esp-homekit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/esp-wolfssl" vcs="Git" />
+  </component>
+</project>

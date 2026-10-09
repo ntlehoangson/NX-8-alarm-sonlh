@@ -1,0 +1,108 @@
+{
+  "description": "NX-8-alarm protocol examples for documentation; not an existing firmware JSON API or a recording from the user's panel.",
+  "source_commit": "3d7aa2021191717e01990b141d0e5a2e8af93ade",
+  "wire_notation": "Space-separated hexadecimal 9-bit symbols. Only the first symbol has the 0x100 address flag. Checksum uses low 8 bits and is appended low byte first.",
+  "checksum_algorithm": "Fletcher-16 modulo 255, initial sums zero",
+  "synthetic_note": "Synthetic frames are derived from code only. Unused fixture status fields are zero and do not prove a physical panel emits these exact frames. No frame was transmitted.",
+  "examples": [
+    {
+      "id": "documented_poll_c0",
+      "provenance": "repository_capture",
+      "source": "NX6v2_Compatibility_and_Lessons_Learned.md:59-65",
+      "wire_hex": "1c0 10 d0 91",
+      "payload_hex": "c0 10",
+      "meaning": "Panel polls keypad address c0"
+    },
+    {
+      "id": "documented_poll_c8",
+      "provenance": "repository_capture",
+      "source": "NX6v2_Compatibility_and_Lessons_Learned.md:59-65",
+      "wire_hex": "1c8 10 d8 a1",
+      "payload_hex": "c8 10",
+      "meaning": "Panel polls keypad address c8"
+    },
+    {
+      "id": "documented_keepalive_response",
+      "provenance": "repository_capture",
+      "source": "NX6v2_Compatibility_and_Lessons_Learned.md:59-65",
+      "wire_hex": "108 44 00 4c a0",
+      "payload_hex": "08 44 00",
+      "meaning": "Keypad keepalive response"
+    },
+    {
+      "id": "default_address_poll",
+      "provenance": "synthetic",
+      "wire_hex": "1d8 10 e8 c1",
+      "payload_hex": "d8 10",
+      "meaning": "Poll MY_ID=d8"
+    },
+    {
+      "id": "away_command",
+      "provenance": "synthetic",
+      "wire_hex": "108 d1 d8 02 01 b5 fe",
+      "payload_hex": "08 d1 d8 02 01",
+      "meaning": "Away request; not evidence that a panel accepted the request"
+    },
+    {
+      "id": "night_command",
+      "provenance": "synthetic",
+      "wire_hex": "108 d1 d8 00 01 b3 fa",
+      "payload_hex": "08 d1 d8 00 01",
+      "meaning": "Night/sleep request; not evidence that a panel accepted the request"
+    },
+    {
+      "id": "command_ack",
+      "provenance": "synthetic",
+      "wire_hex": "1d8 40 19 f1",
+      "payload_hex": "d8 40",
+      "meaning": "Transport command ACK to MY_ID=d8; does not establish the final alarm state"
+    },
+    {
+      "id": "pin_return_ack",
+      "provenance": "synthetic",
+      "wire_hex": "108 40 00 48 98",
+      "payload_hex": "08 40 00",
+      "meaning": "ACK response after a valid type70 message"
+    },
+    {
+      "id": "zone_1_and_3_triggered",
+      "provenance": "synthetic",
+      "wire_hex": "100 04 05 00 00 00 00 00 09 3a",
+      "payload_hex": "00 04 05 00 00 00 00 00",
+      "decoded": {
+        "triggered_bits_in_first_byte": [0, 2],
+        "homekit_sensors_set_true": [1, 3],
+        "default_retention_seconds": 60,
+        "other_sensor_states": "Unchanged by this parser invocation; existing timers may still be active"
+      }
+    },
+    {
+      "id": "partition_disarmed_ready",
+      "provenance": "synthetic",
+      "wire_hex": "100 18 00 00 00 00 00 00 04 00 1c e0",
+      "payload_hex": "00 18 00 00 00 00 00 00 04 00",
+      "decoded": {"partition_index": 0, "armed": false, "stay": false, "alarm": false, "stable": true, "r2arm_bit_set": true, "homekit_current": 3, "homekit_target_when_stable": 3}
+    },
+    {
+      "id": "partition_away_ready",
+      "provenance": "synthetic",
+      "wire_hex": "100 18 00 40 00 00 00 00 04 00 5c a2",
+      "payload_hex": "00 18 00 40 00 00 00 00 04 00",
+      "decoded": {"partition_index": 0, "armed": true, "stay": false, "alarm": false, "stable": true, "r2arm_bit_set": true, "homekit_current": 1, "homekit_target_when_stable": 1}
+    },
+    {
+      "id": "partition_night_ready",
+      "provenance": "synthetic",
+      "wire_hex": "100 18 00 40 00 04 00 00 04 00 60 b6",
+      "payload_hex": "00 18 00 40 00 04 00 00 04 00",
+      "decoded": {"partition_index": 0, "armed": true, "stay": true, "alarm": false, "stable": true, "r2arm_bit_set": true, "homekit_current": 2, "homekit_target_when_stable": 2}
+    },
+    {
+      "id": "partition_away_alarm",
+      "provenance": "synthetic",
+      "wire_hex": "100 18 00 40 01 00 00 00 04 00 5d a8",
+      "payload_hex": "00 18 00 40 01 00 00 00 04 00",
+      "decoded": {"partition_index": 0, "armed": true, "stay": false, "alarm": true, "stable": true, "r2arm_bit_set": true, "homekit_current": 4, "homekit_target_when_stable": 1}
+    }
+  ]
+}
